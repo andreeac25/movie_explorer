@@ -2,6 +2,37 @@
     <string name="app_name">Movie Explorer</string>
     <string name="home">Home</string>
     <string name="search">Search</string>
-    <string name="list">MyList</string>
+    <string name="list">Watch List</string>
+    <string name="welcome">Welcome!</string>
+    <string name="popular">Popular</string>
+    <string name="fire">fire</string>
+    <string name="action">Action</string>
+    <string name="comedy">Comedy</string>
+    <string name="romance">Romance</string>
+    <string name="horror">Horror</string>
+    <string name="sf">Science Fiction</string>
+    <string name="filter">Filter</string>
+    <string name="todo">TODO</string>
+    <string name="movie_explorer">Movie Explorer</string>
+    <string name="drama">Drama</string>
+    <string name="fantasy">Fantasy</string>
+    <string name="thriller">Thriller</string>
+    <string name="animation">Animation</string>
+    <string name="documentary">Documentary</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="social_login">Social Login</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">SIGN-UP</string>
+    <string name="create_account">Create Account</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="what_do_you_want_to_watch">What do you want to watch?</string>
+    <string name="details">Details</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save_movie">Save Movie</string>
 
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action"
+        android:title="@string/action" />
+    <item android:id="@+id/comedy"
+        android:title="@string/comedy" />
+    <item android:id="@+id/romance"
+        android:title="@string/romance" />
+    <item android:id="@+id/drama"
+        android:title="@string/drama"/>
+    <item android:id="@+id/horror"
+        android:title="@string/horror" />
+    <item android:id="@+id/sf"
+        android:title="@string/sf" />
+    <item android:id="@+id/fantasy"
+        android:title="@string/fantasy"/>
+    <item android:id="@+id/thriller"
+        android:title="@string/thriller"/>
+    <item android:id="@+id/animation"
+        android:title="@string/animation"/>
+    <item android:id="@+id/documentary"
+        android:title="@string/documentary"/>
+
+</menu>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:id="@+id/frameInfoPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        tools:ignore="MissingConstraints">
+
+
+            <ImageButton
+                android:id="@+id/buttonBackToHome"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/arrow"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:contentDescription="@string/list"
+                app:tint="@color/white"
+            />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="@string/details"
+                android:layout_gravity="center_horizontal"
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_medium" />
+
+            <ImageButton
+                android:id="@+id/button_save_watchlist"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:contentDescription="@string/save_movie"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/list"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                app:tint="@color/white" />
+
+    </FrameLayout>
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingConstraints">
+
+    <ImageView
+        android:id="@+id/backgroundMovie"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="90dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="90dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
+    <ImageView
+        android:id="@+id/posterDetail"
+        android:layout_width="130dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/rounded_image"
+        android:clipToOutline="true"
+        android:elevation="180dp"
+        android:scaleType="centerCrop"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/titleDetail"
+        android:layout_width="218dp"
+        android:layout_height="86dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginStart="170dp"
+        android:lines="2"
+        android:maxLines="2"
+        android:text="TextView"
+        android:textSize="30sp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/white"
+        tools:ignore="MissingConstraints" />
+
+
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="340dp"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="#88000000"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundMovie"
+        app:layout_constraintStart_toEndOf="@+id/posterDetail"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginBottom="536dp"
+            android:elevation="2dp"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:srcCompat="@android:drawable/btn_star"
+            app:tint="#ffc107"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="272dp" />
+
+        <TextView
+            android:id="@+id/scoreDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="10dp"
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowRadius="9"
+            android:text="TextView"
+            android:textColor="@color/yellow"
+            android:textSize="20sp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/aboutMovie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="510dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="About Movie"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="520dp" />
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="550dp"
+        android:src="@drawable/release_date"
+        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.2"
+        app:tint="@color/lightGray" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="546dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Release Date:"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/aboutMovie"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/release_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="547dp"
+        android:text="TextView"
+        android:textColor="@color/lightBlue"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.333"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="570dp"
+        android:layout_marginStart="32dp"
+        android:src="@drawable/synopsi"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:tint="@color/lightGray"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="32dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="567dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Synopsy:"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/overview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="568dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/textView4"
+        tools:ignore="MissingConstraints" />
+
+</FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

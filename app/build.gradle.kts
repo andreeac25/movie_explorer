@@ -32,6 +32,13 @@ android {
 }
 
 dependencies {
+    implementation(libs.recyclerview)
+    implementation(libs.cardview)
+    val fragment_version = "1.6.1"
+
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -41,4 +48,8 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.fragment:fragment:${fragment_version}")
+    implementation("com.google.android.material:material:1.12.0")
+
+
 }

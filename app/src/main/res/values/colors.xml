@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="lightBlue">#98C1E7</color>
-    <color name="background">#1A1C2C</color>
+    <color name="lightBlue">#00B6FA</color>
+    <color name="blue">#25AEEF</color>
+    <color name="background">#242A32</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="purple">#7209B7</color>
+    <color name="menu">#004380</color>
+    <color name="gray">#67686D</color>
+    <color name="lightGray">#3A4048</color>
+    <color name="yellow">#ffc107</color>
+
 </resources>
