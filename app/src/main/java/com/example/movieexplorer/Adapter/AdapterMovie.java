@@ -1,7 +1,6 @@
+// app/src/main/java/com/example/movieexplorer/Adapter/MovieAdapter.java
 package com.example.movieexplorer.Adapter;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide; // pentru încărcarea imaginilor
-import com.example.movieexplorer.Activity.DetailActivity;
-import com.example.movieexplorer.Activity.Movie;
+import com.bumptech.glide.Glide;
+import com.example.movieexplorer.Domain.MovieItem;
 import com.example.movieexplorer.R;
 
 import java.util.List;
@@ -21,40 +19,53 @@ import java.util.Locale;
 
 public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MovieViewHolder> {
 
-    private List<Movie> movieList;
-    private Context context;
+    private List<MovieItem> movieList;
+    private OnItemClickListener listener; // Interfață pentru click-uri
 
-    public AdapterMovie(Context context, List<Movie> movieList) {
-        this.context = context;
+    // Interfața pentru a comunica click-urile către fragment/activitate
+    public interface OnItemClickListener {
+        void onItemClick(MovieItem film);
+    }
+
+    public AdapterMovie(List<MovieItem> movieList, OnItemClickListener listener) {
         this.movieList = movieList;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.movie_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
         return new MovieViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        Movie movie = movieList.get(position);
-
-        holder.title.setText(movie.getTitle());
-
-        float scoreFloat = Float.parseFloat(movie.getScore());
-        String formattedScore = String.format(Locale.US, "%.1f", scoreFloat);
-        holder.score.setText(formattedScore);
+        MovieItem film = movieList.get(position);
+        holder.titleTextView.setText(film.getTitle());
+        if (holder.scoreTextView != null) {
+            holder.scoreTextView.setText(String.format(Locale.US, "%.1f", film.getVoteAverage()));
+        }
 
 
 
-        // URL complet poster (TMDB poster base URL + posterPath)
-        String posterUrl = "https://image.tmdb.org/t/p/w500" + movie.getImg();
+        // Construiește URL-ul complet pentru imaginea posterului
+        // The MovieDB folosește "w500" ca mărime standard pentru postere
+        String imageUrl = "https://image.tmdb.org/t/p/w500" + film.getPosterPath();
 
-        Glide.with(context)
-                .load(posterUrl)
-                .into(holder.img);
+        // Folosește Glide pentru a încărca imaginea
+        Glide.with(holder.itemView.getContext())
+                .load(imageUrl)
+                .placeholder(R.drawable.ic_launcher_background) // Un placeholder vizibil în timp ce se încarcă
+                .error(R.drawable.ic_launcher_foreground) // O imagine de eroare dacă nu se încarcă
+                .into(holder.posterImageView);
 
+        // Setează listener-ul pentru click pe întregul element
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(film);
+            }
+        });
     }
 
     @Override
@@ -62,15 +73,16 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MovieViewHol
         return movieList.size();
     }
 
-    static class MovieViewHolder extends RecyclerView.ViewHolder {
-        TextView title, score;
-        ImageView img;
+    // ViewHolder-ul care deține referințele la view-urile din viewholder_movie.xml
+    public static class MovieViewHolder extends RecyclerView.ViewHolder {
+        ImageView posterImageView;
+        TextView titleTextView, scoreTextView;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.nameTxt);
-            score = itemView.findViewById(R.id.scoreTxt);
-            img = itemView.findViewById(R.id.imageView);
+            posterImageView = itemView.findViewById(R.id.imageView);
+            titleTextView = itemView.findViewById(R.id.nameTxt);
+            scoreTextView = itemView.findViewById(R.id.scoreTxt);
         }
     }
 }

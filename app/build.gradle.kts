@@ -34,6 +34,7 @@ android {
 dependencies {
     implementation(libs.recyclerview)
     implementation(libs.cardview)
+    implementation(libs.volley)
     val fragment_version = "1.6.1"
 
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
