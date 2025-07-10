@@ -20,26 +20,28 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.example.movieexplorer.Domain.MovieItem;
+import com.example.movieexplorer.Domain.Genre;
+import com.example.movieexplorer.Domain.Movie;
 import com.example.movieexplorer.R;
 import com.google.gson.Gson;
 
+import java.util.List;
 import java.util.Locale;
 
 public class DetailFragment extends Fragment {
 
     private static final String ARG_FILM_ID = "id"; // C
     private RequestQueue mRequestQueue;
-    private TextView title, overview, releaseDate, score, runtime;
+    private TextView title, overview, releaseDate, score, runtime, categories;
     private int idFilm;
     private ImageView background, poster;
     private StringRequest mStringReguest;
 
-    // Cheia API de la TMDB
+
     private static final String API_KEY = "0ae44dc58ea8023c0d00a94e0cb0a0c9";
     private static final String BASE_DETAIL_URL = "https://api.themoviedb.org/3/movie/";
 
-    // Metodă statică pentru a crea o instanță a fragmentului cu argumente
+
     public static DetailFragment newInstance(int filmId) {
         DetailFragment fragment = new DetailFragment();
         Bundle args = new Bundle();
@@ -51,7 +53,7 @@ public class DetailFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Extrage ID-ul filmului din argumente
+
         if (getArguments() != null) {
             idFilm = getArguments().getInt(ARG_FILM_ID, 0);
         }
@@ -60,31 +62,31 @@ public class DetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Aloca layout-ul pentru acest fragment
+
         View view = inflater.inflate(R.layout.info_page, container, false);
-        initView(view); // Inițializăm view-urile
-        sendRequest(); // Trimitem cererea API pentru detalii
+        initView(view);
+        sendRequest();
         return view;
     }
 
     private void sendRequest() {
         mRequestQueue = Volley.newRequestQueue(requireContext());
 
-        // Construiește URL-ul complet pentru detalii film
+
         String url = BASE_DETAIL_URL + idFilm + "?api_key=" + API_KEY;
 
         mStringReguest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
-                MovieItem item = gson.fromJson(response, MovieItem.class);
+                Movie item = gson.fromJson(response, Movie.class);
 
-                // Baza URL pentru imagini și dimensiuni
+
                 String baseUrlImage = "https://image.tmdb.org/t/p/";
                 String posterSize = "w500"; // Dimensiune pentru poster
                 String backdropSize = "w1280"; // Dimensiune pentru imaginea de fundal
 
-                // Încărcă imaginile cu Glide, verificând nullability
+
                 if (poster != null && item.getPosterPath() != null) {
                     Glide.with(requireContext())
                             .load(baseUrlImage + posterSize + item.getPosterPath())
@@ -108,6 +110,22 @@ public class DetailFragment extends Fragment {
                 if (releaseDate != null) releaseDate.setText(item.getReleaseDate());
                 if (score != null) score.setText(String.format(Locale.US, "%.1f", item.getVoteAverage()));
                 if (runtime != null) runtime.setText(String.valueOf(item.getRuntime()));
+                if (categories != null) {
+
+                    List<Genre> genres = item.getGenres();
+                    if (genres != null && !genres.isEmpty()) {
+                        StringBuilder genreText = new StringBuilder();
+                        for (int i = 0; i < genres.size(); i++) {
+                            genreText.append(genres.get(i).getName()); // Assuming Genre has a getName() method
+                            if (i < genres.size() - 1) {
+                                genreText.append(", "); // Add comma and space between genres
+                            }
+                        }
+                        categories.setText(genreText.toString());
+                    } else {
+                        categories.setText("N/A"); // Or leave it empty, or set a default message
+                    }
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -120,7 +138,7 @@ public class DetailFragment extends Fragment {
         mRequestQueue.add(mStringReguest);
     }
 
-    // Inițializează view-urile din layout-ul fragmentului
+
     private void initView(View view) {
         title = view.findViewById(R.id.titleDetail);
         overview = view.findViewById(R.id.overview);
@@ -129,13 +147,15 @@ public class DetailFragment extends Fragment {
         background = view.findViewById(R.id.backgroundMovie);
         poster = view.findViewById(R.id.posterDetail);
         runtime = view.findViewById(R.id.runtime);
+        categories = view.findViewById(R.id.categories);
+
 
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // Anulează cererile Volley pentru a preveni memory leaks
+
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(this);
         }

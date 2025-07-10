@@ -10,5 +10,6 @@
     <color name="gray">#67686D</color>
     <color name="lightGray">#3A4048</color>
     <color name="yellow">#ffc107</color>
+    <color name="searchColor">#5A697D</color>
 
 </resources>

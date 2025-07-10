@@ -1,6 +1,6 @@
-// app/src/main/java/com/example/movieexplorer/Adapter/MovieAdapter.java
 package com.example.movieexplorer.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.movieexplorer.Domain.MovieItem;
+import com.example.movieexplorer.Domain.Movie;
 import com.example.movieexplorer.R;
 
 import java.util.List;
@@ -19,48 +19,51 @@ import java.util.Locale;
 
 public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MovieViewHolder> {
 
-    private List<MovieItem> movieList;
-    private OnItemClickListener listener; // Interfață pentru click-uri
+    private List<Movie> movieList;
+    private OnItemClickListener listener;
+    private int itemLayoutResId;
 
-    // Interfața pentru a comunica click-urile către fragment/activitate
     public interface OnItemClickListener {
-        void onItemClick(MovieItem film);
+        void onItemClick(Movie film);
     }
 
-    public AdapterMovie(List<MovieItem> movieList, OnItemClickListener listener) {
+
+    public AdapterMovie(List<Movie> movieList, OnItemClickListener listener) {
+        this(movieList, listener, R.layout.movie_item);
+    }
+
+
+    public AdapterMovie(List<Movie> movieList, OnItemClickListener listener, int itemLayoutResId) {
         this.movieList = movieList;
         this.listener = listener;
+        this.itemLayoutResId = itemLayoutResId;
     }
 
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
-        return new MovieViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(itemLayoutResId, parent, false);
+        return new MovieViewHolder(view, itemLayoutResId); // Transmitem ID-ul layout-ului către ViewHolder
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        MovieItem film = movieList.get(position);
+        Movie film = movieList.get(position);
         holder.titleTextView.setText(film.getTitle());
+
+
         if (holder.scoreTextView != null) {
             holder.scoreTextView.setText(String.format(Locale.US, "%.1f", film.getVoteAverage()));
         }
 
-
-
-        // Construiește URL-ul complet pentru imaginea posterului
-        // The MovieDB folosește "w500" ca mărime standard pentru postere
         String imageUrl = "https://image.tmdb.org/t/p/w500" + film.getPosterPath();
 
-        // Folosește Glide pentru a încărca imaginea
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl)
-                .placeholder(R.drawable.ic_launcher_background) // Un placeholder vizibil în timp ce se încarcă
-                .error(R.drawable.ic_launcher_foreground) // O imagine de eroare dacă nu se încarcă
+                .placeholder(R.drawable.ic_launcher_background) // Asigură-te că aceste drawables există
+                .error(R.drawable.ic_launcher_foreground)      // Asigură-te că aceste drawables există
                 .into(holder.posterImageView);
 
-        // Setează listener-ul pentru click pe întregul element
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onItemClick(film);
@@ -73,16 +76,27 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MovieViewHol
         return movieList.size();
     }
 
-    // ViewHolder-ul care deține referințele la view-urile din viewholder_movie.xml
     public static class MovieViewHolder extends RecyclerView.ViewHolder {
         ImageView posterImageView;
-        TextView titleTextView, scoreTextView;
+        TextView titleTextView;
+        TextView scoreTextView;
 
-        public MovieViewHolder(@NonNull View itemView) {
+        public MovieViewHolder(@NonNull View itemView, int layoutResId) {
             super(itemView);
-            posterImageView = itemView.findViewById(R.id.imageView);
-            titleTextView = itemView.findViewById(R.id.nameTxt);
-            scoreTextView = itemView.findViewById(R.id.scoreTxt);
+
+            if (layoutResId == R.layout.movie_item) {
+                posterImageView = itemView.findViewById(R.id.imageView);
+                titleTextView = itemView.findViewById(R.id.nameTxt);
+                scoreTextView = itemView.findViewById(R.id.scoreTxt);
+            } else if (layoutResId == R.layout.search_item) {
+                posterImageView = itemView.findViewById(R.id.search_item_poster);
+                titleTextView = itemView.findViewById(R.id.search_item_title);
+                scoreTextView = null;
+            } else {
+
+                Log.e("AdapterMovie", "Unknown layout ID: " + layoutResId);
+
+            }
         }
     }
 }

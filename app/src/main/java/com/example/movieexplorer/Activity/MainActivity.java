@@ -3,6 +3,8 @@ package com.example.movieexplorer.Activity;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
+
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +18,8 @@ import com.example.movieexplorer.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageButton homePageBtn, watchListPageBtn;
+    ImageButton homePageBtn, watchListPageBtn, searchBtn;
+    EditText searchInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +27,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-
             loadFragment(new HomeFragment());
         }
 
 
         homePageBtn = findViewById(R.id.button_homepage);
         watchListPageBtn = findViewById(R.id.button_watchlist);
+        searchInput = findViewById(R.id.search_input);
+        searchBtn = findViewById(R.id.button_search);
 
         // Home button click
         homePageBtn.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
                 updateButtonColor(homePageBtn, true);
                 updateButtonColor(watchListPageBtn, false);
+                updateButtonColor(searchBtn, false);
 
                 // Show HomeFragment
                 loadFragment(new HomeFragment());
@@ -56,9 +61,19 @@ public class MainActivity extends AppCompatActivity {
 
                 updateButtonColor(watchListPageBtn, true);
                 updateButtonColor(homePageBtn, false);
+                updateButtonColor(searchBtn, false);
 
                 // Show WatchListFragment
                 loadFragment(new WatchListFragment());
+            }
+        });
+
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchInput.setVisibility(View.VISIBLE);
+                searchInput.requestFocus();
             }
         });
 
@@ -69,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentLayout, fragment);
-        fragmentTransaction.addToBackStack(null); // 'null' înseamnă că nu dăm un nume acestei tranzacții în back stack
-        fragmentTransaction.commit(); // Confirmăm tranzacția
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     private void updateButtonColor(ImageButton button, boolean selected) {

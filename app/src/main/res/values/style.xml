@@ -11,12 +11,19 @@
         <item name="strokeWidth">0dp</item>
         <item name="strokeColor">@android:color/transparent</item>
         <item name="shapeAppearance">@style/ShapeAppearance.Material3.Corner.None</item>
-
     </style>
 
     <style name="RoundedImageStyle" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:tint">@color/gray</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="queryBackground">@android:color/transparent</item>
     </style>
 
 </resources>
