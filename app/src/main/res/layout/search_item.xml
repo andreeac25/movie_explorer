@@ -3,15 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/search_movie_item_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
         android:background="@drawable/rounded_corner"
-        android:backgroundTint="@android:color/transparent"
-        android:padding="10dp"
+        android:backgroundTint="@color/background"
         tools:ignore="MissingConstraints">
 
         <ImageView
@@ -19,23 +18,79 @@
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
             android:background="@drawable/rounded_image"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
         <TextView
             android:id="@+id/search_item_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_medium"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="@color/white"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="120dp"
             android:layout_marginEnd="10dp"
             android:text="TextView" />
 
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/search_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:text="Date"
+            android:textColor="@color/gray"
+            android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner"
+                android:backgroundTint="#88000000"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="120dp"
+                android:layout_marginBottom="15dp"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/star"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="3dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@android:drawable/btn_star"
+                    app:tint="#ffc107" />
+
+                <TextView
+                    android:id="@+id/scoreResult"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="25dp"
+                    android:gravity="center_vertical"
+                    android:text="stars"
+                    android:textColor="@color/yellow"
+                    android:textSize="15sp" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

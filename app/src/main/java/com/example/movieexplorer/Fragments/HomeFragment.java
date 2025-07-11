@@ -51,6 +51,9 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
     private static final String API_KEY = "0ae44dc58ea8023c0d00a94e0cb0a0c9";
     private static final String POPULAR_MOVIES_URL = "https://api.themoviedb.org/3/movie/popular?api_key=";
     private static final String SEARCH_MOVIES_URL = "https://api.themoviedb.org/3/search/movie?api_key=";
+    public static final String TAG = "HomeFragment";
+
+    private boolean hasLoadedPopularMovies = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -61,19 +64,38 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
         recyclerViewMovies.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
         movieList = new ArrayList<>();
-
-        adapterMovie = new AdapterMovie(movieList, this, R.layout.movie_item); // Explicităm R.layout.movie_item
+        adapterMovie = new AdapterMovie(movieList, this, R.layout.movie_item);
         recyclerViewMovies.setAdapter(adapterMovie);
 
         mRequestQueue = Volley.newRequestQueue(requireContext());
 
         searchInput = view.findViewById(R.id.search_input);
+
         setupSearchInput(view);
 
-        fetchPopularMovies();
+        // fetchPopularMovies() este acum apelat în onResume()
 
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (searchInput != null && !searchInput.getText().toString().isEmpty()) {
+            searchInput.setText("");
+
+        } else if (searchInput != null && searchInput.getText().toString().isEmpty()) {
+
+            fetchPopularMovies();
+        }
+
+        InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null && getView() != null) {
+            imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+        }
+    }
+
 
     private void setupSearchInput(View rootView) {
         searchInput.setOnEditorActionListener((v, actionId, event) -> {
@@ -107,16 +129,22 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
             public void afterTextChanged(Editable s) {}
         });
 
-
         View searchLayout = rootView.findViewById(R.id.search_layout);
         if (searchLayout != null) {
             searchLayout.setOnClickListener(v -> {
-                searchInput.requestFocus();
-                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.showSoftInput(searchInput, InputMethodManager.SHOW_IMPLICIT);
-                }
+                activateSearchInput();
             });
+        }
+    }
+
+
+    public void activateSearchInput() {
+        if (searchInput != null) {
+            searchInput.requestFocus();
+            InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInput(searchInput, InputMethodManager.SHOW_IMPLICIT);
+            }
         }
     }
 
@@ -148,9 +176,9 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
                                 Type listType = new TypeToken<List<Movie>>() {}.getType();
                                 List<Movie> fetchedMovies = gson.fromJson(resultsArray, listType);
 
-                                if (getFragmentManager() != null) {
+                                if (getParentFragmentManager() != null) {
                                     SearchResultFragment searchResultsFragment = SearchResultFragment.newInstance(fetchedMovies, query);
-                                    getFragmentManager().beginTransaction()
+                                    getParentFragmentManager().beginTransaction()
                                             .replace(R.id.fragmentLayout, searchResultsFragment)
                                             .addToBackStack(null)
                                             .commit();
@@ -196,12 +224,12 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
                             adapterMovie.notifyDataSetChanged();
 
                             if (fetchedMovies.isEmpty() && searchInput.getText().toString().isEmpty()) {
-                                Toast.makeText(getContext(), "Lista de filme populare este goală.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Empty list", Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
                             Log.e("HomeFragment", "JSON Parsing error for popular movies: " + e.getMessage());
-                            Toast.makeText(getContext(), "Eroare la parsarea datelor populare.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Error parsing popular data.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -218,10 +246,10 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
 
     @Override
     public void onItemClick(Movie film) {
-        if (getFragmentManager() != null) {
+        if (getParentFragmentManager() != null) {
             DetailFragment detailFragment = DetailFragment.newInstance(film.getId());
 
-            getFragmentManager().beginTransaction()
+            getParentFragmentManager().beginTransaction()
                     .replace(R.id.fragmentLayout, detailFragment)
                     .addToBackStack(null)
                     .commit();

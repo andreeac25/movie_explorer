@@ -43,14 +43,14 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MovieViewHol
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(itemLayoutResId, parent, false);
-        return new MovieViewHolder(view, itemLayoutResId); // Transmitem ID-ul layout-ului către ViewHolder
+        return new MovieViewHolder(view, itemLayoutResId);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         Movie film = movieList.get(position);
         holder.titleTextView.setText(film.getTitle());
-
+        holder.dateResult.setText(film.getReleaseDate());
 
         if (holder.scoreTextView != null) {
             holder.scoreTextView.setText(String.format(Locale.US, "%.1f", film.getVoteAverage()));
@@ -60,8 +60,8 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MovieViewHol
 
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl)
-                .placeholder(R.drawable.ic_launcher_background) // Asigură-te că aceste drawables există
-                .error(R.drawable.ic_launcher_foreground)      // Asigură-te că aceste drawables există
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.unavailable)
                 .into(holder.posterImageView);
 
         holder.itemView.setOnClickListener(v -> {
@@ -80,6 +80,7 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MovieViewHol
         ImageView posterImageView;
         TextView titleTextView;
         TextView scoreTextView;
+        TextView dateResult;
 
         public MovieViewHolder(@NonNull View itemView, int layoutResId) {
             super(itemView);
@@ -88,15 +89,20 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MovieViewHol
                 posterImageView = itemView.findViewById(R.id.imageView);
                 titleTextView = itemView.findViewById(R.id.nameTxt);
                 scoreTextView = itemView.findViewById(R.id.scoreTxt);
+                dateResult = itemView.findViewById(R.id.year);
+
             } else if (layoutResId == R.layout.search_item) {
                 posterImageView = itemView.findViewById(R.id.search_item_poster);
                 titleTextView = itemView.findViewById(R.id.search_item_title);
-                scoreTextView = null;
+                scoreTextView = itemView.findViewById(R.id.scoreResult);
+                dateResult = itemView.findViewById(R.id.search_date);
             } else {
 
                 Log.e("AdapterMovie", "Unknown layout ID: " + layoutResId);
 
             }
         }
+
+
     }
 }
