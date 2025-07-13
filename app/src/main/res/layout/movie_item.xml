@@ -23,7 +23,14 @@
     <TextView
         android:id="@+id/year"
         android:layout_width="5dp"
-        android:layout_height="5dp"/>
+        android:layout_height="5dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/genreMovie"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/nameTxt"

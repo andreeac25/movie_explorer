@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageButton
-            android:id="@+id/buttonBackToHome"
+            android:id="@+id/buttonBack"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
@@ -45,7 +45,7 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_save_watchlist"
-            app:layout_constraintStart_toEndOf="@+id/buttonBackToHome"
+            app:layout_constraintStart_toEndOf="@+id/buttonBack"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -74,14 +74,17 @@
         app:layout_constraintTop_toBottomOf="@+id/topBarLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" /> <ImageView
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    <ImageView
         android:id="@+id/posterDetail"
         android:layout_width="120dp"
         android:layout_height="180dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp" android:background="@drawable/rounded_image"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/rounded_image"
         android:clipToOutline="true"
-        android:elevation="5dp" android:scaleType="centerCrop"
+        android:elevation="5dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/backgroundMovie"
         tools:srcCompat="@tools:sample/avatars"/>

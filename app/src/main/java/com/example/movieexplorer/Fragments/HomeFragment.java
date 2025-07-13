@@ -1,5 +1,6 @@
 package com.example.movieexplorer.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -41,55 +43,80 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickListener {
-
-    private RecyclerView recyclerViewMovies;
-    private AdapterMovie adapterMovie;
-    private List<Movie> movieList;
+    private RecyclerView recyclerViewNowPlaying, recyclerTrending, recyclerViewUpcoming, recyclerViewTopRated, recyclerViewPopular;
+    private AdapterMovie adapterNowPlaying, adapterTrending, adapterUpcoming, adapterTopRated, adapterPopular;
+    private List<Movie> movieListNowPlaying, movieListTrending, movieListUpcoming, movieListTopRated, movieListPopular;
     private RequestQueue mRequestQueue;
     private EditText searchInput;
-
     private static final String API_KEY = "0ae44dc58ea8023c0d00a94e0cb0a0c9";
-    private static final String POPULAR_MOVIES_URL = "https://api.themoviedb.org/3/movie/popular?api_key=";
+    private static final String TRENDING_MOVIES_URL = "https://api.themoviedb.org/3/trending/movie/day?api_key=";
+    private static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=";
+    private static final String UPCOMING_URL = "https://api.themoviedb.org/3/movie/upcoming?api_key=";
+    private static final String TOP_RATED_URL = "https://api.themoviedb.org/3/movie/top_rated?api_key=";
+    private static final String POPULAR_URL = "https://api.themoviedb.org/3/movie/popular?api_key=";
     private static final String SEARCH_MOVIES_URL = "https://api.themoviedb.org/3/search/movie?api_key=";
     public static final String TAG = "HomeFragment";
 
-    private boolean hasLoadedPopularMovies = false;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.homepage, container, false);
 
-        recyclerViewMovies = view.findViewById(R.id.recyclerView);
-        recyclerViewMovies.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        recyclerViewNowPlaying = view.findViewById(R.id.recyclerViewNowPlaying);
+        recyclerViewNowPlaying.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        movieListNowPlaying = new ArrayList<>();
+        adapterNowPlaying = new AdapterMovie(movieListNowPlaying, this, R.layout.movie_item);
+        recyclerViewNowPlaying.setAdapter(adapterNowPlaying);
 
-        movieList = new ArrayList<>();
-        adapterMovie = new AdapterMovie(movieList, this, R.layout.movie_item);
-        recyclerViewMovies.setAdapter(adapterMovie);
+
+        recyclerTrending = view.findViewById(R.id.recyclerViewTrending);
+        recyclerTrending.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        movieListTrending = new ArrayList<>();
+        adapterTrending = new AdapterMovie(movieListTrending, this, R.layout.movie_item);
+        recyclerTrending.setAdapter(adapterTrending);
+
+
+        recyclerViewUpcoming = view.findViewById(R.id.recyclerViewUpcoming);
+        recyclerViewUpcoming.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        movieListUpcoming = new ArrayList<>();
+        adapterUpcoming = new AdapterMovie(movieListUpcoming, this, R.layout.movie_item);
+        recyclerViewUpcoming.setAdapter(adapterUpcoming);
+
+
+        recyclerViewPopular = view.findViewById(R.id.recyclerViewPopular);
+        recyclerViewPopular.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        movieListPopular = new ArrayList<>();
+        adapterPopular = new AdapterMovie(movieListPopular, this, R.layout.movie_item);
+        recyclerViewPopular.setAdapter(adapterPopular);
+
+
+        recyclerViewTopRated = view.findViewById(R.id.recyclerViewTopRated);
+        recyclerViewTopRated.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        movieListTopRated = new ArrayList<>();
+        adapterTopRated = new AdapterMovie(movieListTopRated, this, R.layout.movie_item);
+        recyclerViewTopRated.setAdapter(adapterTopRated);
+
 
         mRequestQueue = Volley.newRequestQueue(requireContext());
-
         searchInput = view.findViewById(R.id.search_input);
-
         setupSearchInput(view);
-
-        // fetchPopularMovies() este acum apelat în onResume()
-
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         if (searchInput != null && !searchInput.getText().toString().isEmpty()) {
             searchInput.setText("");
-
         } else if (searchInput != null && searchInput.getText().toString().isEmpty()) {
-
-            fetchPopularMovies();
+            fetchMovies(NOW_PLAYING_URL + API_KEY, adapterNowPlaying, movieListNowPlaying, "Now Playing");
+            fetchMovies(TRENDING_MOVIES_URL + API_KEY, adapterTrending, movieListTrending, "Trending");
+            fetchMovies(UPCOMING_URL + API_KEY, adapterUpcoming, movieListUpcoming, "Upcoming");
+            fetchMovies(POPULAR_URL + API_KEY, adapterPopular, movieListPopular, "Popular");
+            fetchMovies(TOP_RATED_URL + API_KEY, adapterTopRated, movieListTopRated, "Top Rated");
         }
-
         InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null && getView() != null) {
             imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
@@ -102,12 +129,10 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                     actionId == EditorInfo.IME_ACTION_DONE ||
                     (event != null && event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-
                 InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (imm != null) {
                     imm.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
                 }
-
                 performSearchAndNavigate(searchInput.getText().toString());
                 return true;
             }
@@ -117,18 +142,20 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
         searchInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 0) {
-                    fetchPopularMovies();
+                    fetchMovies(NOW_PLAYING_URL + API_KEY, adapterNowPlaying, movieListNowPlaying, "Now Playing");
+                    fetchMovies(TRENDING_MOVIES_URL + API_KEY, adapterTrending, movieListTrending, "Trending");
+                    fetchMovies(UPCOMING_URL + API_KEY, adapterUpcoming, movieListUpcoming, "Upcoming");
+                    fetchMovies(POPULAR_URL + API_KEY, adapterPopular, movieListPopular, "Popular");
+                    fetchMovies(TOP_RATED_URL + API_KEY, adapterTopRated, movieListTopRated, "Top Rated");
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {}
         });
-
         View searchLayout = rootView.findViewById(R.id.search_layout);
         if (searchLayout != null) {
             searchLayout.setOnClickListener(v -> {
@@ -149,11 +176,6 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
     }
 
 
-    private void fetchPopularMovies() {
-        String url = POPULAR_MOVIES_URL + API_KEY;
-        makeMovieRequest(url);
-    }
-
     private void performSearchAndNavigate(String query) {
         if (query.trim().isEmpty()) {
             Toast.makeText(getContext(), "Introduceți un termen de căutare.", Toast.LENGTH_SHORT).show();
@@ -163,7 +185,6 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
         try {
             String encodedQuery = URLEncoder.encode(query, "UTF-8");
             String url = SEARCH_MOVIES_URL + API_KEY + "&query=" + encodedQuery;
-
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
@@ -171,11 +192,9 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
                             try {
                                 JSONObject jsonResponse = new JSONObject(response);
                                 String resultsArray = jsonResponse.getJSONArray("results").toString();
-
                                 Gson gson = new Gson();
                                 Type listType = new TypeToken<List<Movie>>() {}.getType();
                                 List<Movie> fetchedMovies = gson.fromJson(resultsArray, listType);
-
                                 if (getParentFragmentManager() != null) {
                                     SearchResultFragment searchResultsFragment = SearchResultFragment.newInstance(fetchedMovies, query);
                                     getParentFragmentManager().beginTransaction()
@@ -183,7 +202,6 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
                                             .addToBackStack(null)
                                             .commit();
                                 }
-
                             } catch (JSONException e) {
                                 Log.e("HomeFragment", "JSON Parsing error for search: " + e.getMessage());
                                 Toast.makeText(getContext(), "Eroare la parsarea datelor căutării.", Toast.LENGTH_SHORT).show();
@@ -199,14 +217,14 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
 
             stringRequest.setTag(this);
             mRequestQueue.add(stringRequest);
-
         } catch (Exception e) {
             Log.e("HomeFragment", "Error encoding URL: " + e.getMessage());
             Toast.makeText(getContext(), "Eroare la procesarea căutării.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void makeMovieRequest(String url) {
+
+    private void fetchMovies(String url, final AdapterMovie adapter, final List<Movie> movieList, final String categoryName) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -214,41 +232,38 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             String resultsArray = jsonResponse.getJSONArray("results").toString();
-
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Movie>>() {}.getType();
                             List<Movie> fetchedMovies = gson.fromJson(resultsArray, listType);
 
                             movieList.clear();
                             movieList.addAll(fetchedMovies);
-                            adapterMovie.notifyDataSetChanged();
+                            adapter.notifyDataSetChanged();
 
-                            if (fetchedMovies.isEmpty() && searchInput.getText().toString().isEmpty()) {
-                                Toast.makeText(getContext(), "Empty list", Toast.LENGTH_SHORT).show();
+                            if (fetchedMovies.isEmpty()) {
+                                Log.d(TAG, "No movies found for " + categoryName);
                             }
-
                         } catch (JSONException e) {
-                            Log.e("HomeFragment", "JSON Parsing error for popular movies: " + e.getMessage());
-                            Toast.makeText(getContext(), "Error parsing popular data.", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, "JSON Parsing error for " + categoryName + " movies: " + e.getMessage());
+                            Toast.makeText(getContext(), "Error parsing " + categoryName + " data.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("HomeFragment", "Volley Error for popular movies: " + error.getMessage());
-                Toast.makeText(getContext(), "Eroare de rețea sau la încărcarea filmelor populare.", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "Volley Error for " + categoryName + " movies: " + error.getMessage());
+                Toast.makeText(getContext(), "Eroare de rețea sau la încărcarea filmelor " + categoryName + ".", Toast.LENGTH_SHORT).show();
             }
         });
-
         stringRequest.setTag(this);
         mRequestQueue.add(stringRequest);
     }
+
 
     @Override
     public void onItemClick(Movie film) {
         if (getParentFragmentManager() != null) {
             DetailFragment detailFragment = DetailFragment.newInstance(film.getId());
-
             getParentFragmentManager().beginTransaction()
                     .replace(R.id.fragmentLayout, detailFragment)
                     .addToBackStack(null)

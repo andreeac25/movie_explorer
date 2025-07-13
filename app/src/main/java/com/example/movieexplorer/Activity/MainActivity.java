@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -20,11 +19,8 @@ import com.example.movieexplorer.R;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    ImageButton homePageBtn, watchListPageBtn, searchBtn;
-
+    ImageButton homePageBtn, watchListPageBtn, searchBtn, backBtn;
     private FragmentManager fragmentManager;
-
     private HomeFragment homeFragment;
     private WatchListFragment watchListFragment;
 
@@ -42,20 +38,15 @@ public class MainActivity extends AppCompatActivity {
         // This block initializes and displays the HomeFragment when the activity starts for the first time.
         if (savedInstanceState == null) {
             homeFragment = (HomeFragment) fragmentManager.findFragmentByTag(HomeFragment.TAG);
-           // if (homeFragment == null) {
-                homeFragment = new HomeFragment();
-                fragmentManager.beginTransaction()
-                        .add(R.id.fragmentLayout, homeFragment, HomeFragment.TAG)
-                        .commit();
-           // }
+            homeFragment = new HomeFragment();
+            fragmentManager.beginTransaction()
+                    .add(R.id.fragmentLayout, homeFragment, HomeFragment.TAG)
+                    .commit();
+
             showFragment(homeFragment);
             updateButtonColor(homePageBtn, true);
             updateButtonColor(watchListPageBtn, false);
             updateButtonColor(searchBtn, false);
-
-       // } else { // This block retrieves existing fragment instances after a configuration change
-       //     homeFragment = (HomeFragment) fragmentManager.findFragmentByTag(HomeFragment.TAG);
-       //     watchListFragment = (WatchListFragment) fragmentManager.findFragmentByTag(WatchListFragment.TAG);
         }
 
         // This method handles the click event for the search button.

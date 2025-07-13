@@ -34,10 +34,11 @@ public class DetailFragment extends Fragment {
     private RequestQueue mRequestQueue;
     private TextView title, overview, releaseDate, score, runtime, categories;
     private int idFilm;
-    private ImageView background, poster;
+    private ImageView background, poster, backBtn;
     private StringRequest mStringReguest;
     private static final String API_KEY = "0ae44dc58ea8023c0d00a94e0cb0a0c9";
     private static final String BASE_DETAIL_URL = "https://api.themoviedb.org/3/movie/";
+
 
 
     // This method creates a new DetailFragment instance with a specific film ID.
@@ -53,7 +54,6 @@ public class DetailFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             idFilm = getArguments().getInt(FILM_ID, 0);
         }
@@ -67,6 +67,22 @@ public class DetailFragment extends Fragment {
         initView(view);
         sendRequest();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (backBtn != null) {
+            backBtn.setOnClickListener(v -> {
+                if (getParentFragmentManager().getBackStackEntryCount() > 0) {
+                    getParentFragmentManager().popBackStack();
+                } else {
+                    requireActivity().finish();
+                }
+            });
+        } else {
+            Log.e("DetailFragment", "Eroare: Butonul 'backBtn' nu a putut fi găsit în layout-ul info_page.xml!");
+        }
     }
 
     // This method sends a network request to fetch movie details.
@@ -147,14 +163,12 @@ public class DetailFragment extends Fragment {
         poster = view.findViewById(R.id.posterDetail);
         runtime = view.findViewById(R.id.runtime);
         categories = view.findViewById(R.id.categories);
-
-
+        backBtn = view.findViewById(R.id.buttonBack);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(this);
         }
