@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "869933979045",
+    "project_id": "login-register-firebase-e189b",
+    "storage_bucket": "login-register-firebase-e189b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869933979045:android:9376442818d071b0e9444c",
+        "android_client_info": {
+          "package_name": "com.example.movieexplorer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSfrDT2lPrY26cJ8v5YDiVdqjSGo0Mygc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

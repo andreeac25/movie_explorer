@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -35,6 +36,10 @@ dependencies {
     implementation(libs.recyclerview)
     implementation(libs.cardview)
     implementation(libs.volley)
+    implementation(libs.firebase.auth)
+    implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+
     val fragment_version = "1.6.1"
 
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")

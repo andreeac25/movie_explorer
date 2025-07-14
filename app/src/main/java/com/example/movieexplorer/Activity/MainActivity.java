@@ -1,10 +1,8 @@
 package com.example.movieexplorer.Activity;
 
-import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +17,7 @@ import com.example.movieexplorer.R;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    ImageButton homePageBtn, watchListPageBtn, searchBtn, backBtn;
+    ImageButton homePageBtn, watchListPageBtn, searchBtn;
     private FragmentManager fragmentManager;
     private HomeFragment homeFragment;
     private WatchListFragment watchListFragment;
@@ -122,22 +120,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // This method handles the back button press behavior.
-    @Override
-    public void onBackPressed() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager.getBackStackEntryCount() > 0) {
-            fragmentManager.popBackStack();
-
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (imm != null && getCurrentFocus() != null) {
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-            }
-        } else {
-            super.onBackPressed();
-        }
-    }
-
+    // This method replaces the current fragment in the layout with a new one
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

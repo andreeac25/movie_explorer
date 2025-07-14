@@ -11,13 +11,22 @@
         <FrameLayout
             android:id="@+id/homePage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:background="@color/background"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints">
 
+            <ImageButton
+                android:id="@+id/logout"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="320dp"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/icon_acccount_circle"
+                android:scaleType="centerInside"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,6 +46,7 @@
                 android:layout_marginTop="80dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/rounded_corner"
                 android:gravity="center_vertical"
                 android:backgroundTint="@color/lightGray">
@@ -64,13 +74,167 @@
                 app:tint="@color/gray" />
 
             </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="140dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="15dp"
+                tools:ignore="MissingConstraints">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+            <Button
+                android:id="@+id/action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Action"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/searchColor"/>
+            <Button
+                android:id="@+id/adventure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adventure"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/animation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Animation"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor" />
+                <Button
+                    android:id="@+id/comedy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comedy"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/crime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Crime"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor" />
+                <Button
+                    android:id="@+id/documentary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Documentary"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/drama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Drama"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/family"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Family"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/fantasy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fantasy"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="History"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/horror"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Horror"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/music"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Music"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/mystery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mystery"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/romance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Romance"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/science_fiction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sciente Fiction"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/thriller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thriller"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/western"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Western"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/searchColor"/>
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
         </FrameLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="70dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="-15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +249,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:contentDescription="@string/fire"
                 android:src="@drawable/play" />
 
@@ -94,7 +258,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="180dp"
                 android:fontFamily="@font/poppins_thin"
                 android:text="Now Playing"
@@ -116,7 +280,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="250dp"
+                android:layout_marginTop="270dp"
                 android:contentDescription="@string/fire"
                 android:src="@drawable/profits" />
 
@@ -125,7 +289,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="245dp"
+                android:layout_marginTop="265dp"
                 android:layout_marginEnd="180dp"
                 android:fontFamily="@font/poppins_thin"
                 android:text="Trending"
@@ -136,7 +300,7 @@
                 android:id="@+id/recyclerViewTrending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="285dp"
+                android:layout_marginTop="295dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +311,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="485dp"
+                android:layout_marginTop="515dp"
                 android:contentDescription="@string/fire"
                 android:src="@drawable/hourglass" />
 
@@ -156,7 +320,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="480dp"
+                android:layout_marginTop="510dp"
                 android:layout_marginEnd="180dp"
                 android:fontFamily="@font/poppins_thin"
                 android:text="Upcoming"
@@ -167,7 +331,7 @@
                 android:id="@+id/recyclerViewUpcoming"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="515dp"
+                android:layout_marginTop="540dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -178,7 +342,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="715dp"
+                android:layout_marginTop="765dp"
                 android:contentDescription="@string/fire"
                 android:src="@drawable/fire" />
 
@@ -187,7 +351,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="710dp"
+                android:layout_marginTop="760dp"
                 android:layout_marginEnd="180dp"
                 android:fontFamily="@font/poppins_thin"
                 android:text="Popular"
@@ -198,7 +362,7 @@
                 android:id="@+id/recyclerViewPopular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="745dp"
+                android:layout_marginTop="790dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -210,7 +374,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="945dp"
+                android:layout_marginTop="1015dp"
                 android:contentDescription="@string/fire"
                 android:src="@drawable/star_home" />
 
@@ -219,7 +383,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="940dp"
+                android:layout_marginTop="1010dp"
                 android:layout_marginEnd="180dp"
                 android:fontFamily="@font/poppins_thin"
                 android:text="Top Rated"
@@ -230,7 +394,7 @@
                 android:id="@+id/recyclerViewTopRated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="975dp"
+                android:layout_marginTop="1040dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

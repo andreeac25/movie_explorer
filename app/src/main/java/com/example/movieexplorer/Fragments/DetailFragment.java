@@ -81,14 +81,14 @@ public class DetailFragment extends Fragment {
                 }
             });
         } else {
-            Log.e("DetailFragment", "Eroare: Butonul 'backBtn' nu a putut fi găsit în layout-ul info_page.xml!");
+            Log.e("DetailFragment", "Error");
         }
     }
 
     // This method sends a network request to fetch movie details.
     private void sendRequest() {
-        mRequestQueue = Volley.newRequestQueue(requireContext()); // Initializes the Volley request queue.
-        String url = BASE_DETAIL_URL + idFilm + "?api_key=" + API_KEY; // Constructs the API URL for movie details.
+        mRequestQueue = Volley.newRequestQueue(requireContext());
+        String url = BASE_DETAIL_URL + idFilm + "?api_key=" + API_KEY;
         mStringReguest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             // This block handles the successful response from the API.
             @Override
@@ -147,7 +147,7 @@ public class DetailFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 Log.e("DetailFragment", "Volley Error: " + volleyError.getMessage());
-                Toast.makeText(requireContext(), "Eroare la încărcarea detaliilor filmului.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show();
             }
         });
         mRequestQueue.add(mStringReguest);

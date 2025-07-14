@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
     android:fitsSystemWindows="true"
     android:gravity="center"
-    android:padding="30dp">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,24 +19,19 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:text="@string/welcome_back"
+            android:text="@string/create_account"
             android:textSize="40sp"
+            android:layout_marginTop="60dp"
             android:textColor="@color/white"
             android:fontFamily="@font/poppins_thin"
             android:padding="10dp"
+            android:gravity="center"
             />
 
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/icon_acccount_circle"/>
-        
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="25dp"
             android:layout_marginStart="25dp"
             android:hint="@string/email"
@@ -47,7 +41,7 @@
             android:background="@drawable/rounded_corner"
             android:padding="18dp"
             android:inputType="textEmailAddress"
-            android:id="@+id/login_email_input"
+            android:id="@+id/register_email_input"
             />
 
         <EditText
@@ -63,37 +57,48 @@
             android:background="@drawable/rounded_corner"
             android:padding="18dp"
             android:inputType="textPassword"
-            android:id="@+id/login_password_input"
-            />
-        
+            android:id="@+id/register_password_input" />
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:layout_height="80dp"
+            android:text="Register"
             android:fontFamily="@font/poppins_thin"
             android:backgroundTint="@color/white"
             android:textColor="@color/blue"
-            android:padding="10dp"
-            android:layout_margin="40dp"
+            android:padding="18dp"
             android:layout_marginTop="32sp"
+            android:layout_margin="40dp"
             android:textSize="25sp"
-            android:id="@+id/login_btn"/>
+            android:id="@+id/register_btn"/>
+
+        <ProgressBar
+            android:id="@+id/progressBarRegister"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/don_t_have_an_account"
+            android:text="@string/already_have_an_account"
             android:textColor="@color/white"
             android:textSize="20sp"/>
         <Button
-            android:layout_width="120dp"
+            android:id="@+id/logNow"
+            android:layout_width="110dp"
             android:layout_height="50dp"
-            android:text="@string/sign_up"
-            android:textColor="@color/white"
+            android:text="@string/login"
             android:fontFamily="@font/poppins_thin"
             android:backgroundTint="@color/blue"
             android:textSize="15sp"/>
+
+
+
     </LinearLayout>
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
