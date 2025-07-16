@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.movieexplorer.Fragments.DetailFragment;
 import com.example.movieexplorer.Fragments.HomeFragment;
 import com.example.movieexplorer.Fragments.WatchListFragment;
 import com.example.movieexplorer.R;

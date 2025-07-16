@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background">
 
     <LinearLayout
         android:id="@+id/watchList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/background"
         tools:ignore="MissingConstraints">
@@ -29,11 +30,25 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewWatchList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="60dp"
             android:clipToPadding="false"
             android:padding="10dp" />
+
+        <!-- Empty list -->
+        <TextView
+            android:id="@+id/emptyWatchlistMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:text="Empty list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

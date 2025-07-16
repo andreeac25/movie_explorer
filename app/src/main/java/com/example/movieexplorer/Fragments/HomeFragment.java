@@ -1,12 +1,7 @@
 package com.example.movieexplorer.Fragments;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,12 +29,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.movieexplorer.Activity.Login;
+import com.example.movieexplorer.Fragments.AccountFragment;
 import com.example.movieexplorer.Adapter.AdapterMovie;
 import com.example.movieexplorer.Domain.Movie;
 import com.example.movieexplorer.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -57,10 +50,7 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
     private List<Movie> movieListNowPlaying, movieListTrending, movieListUpcoming, movieListTopRated, movieListPopular;
     private RequestQueue mRequestQueue;
     private EditText searchInput;
-    private FirebaseAuth auth;
-    private FirebaseUser user;
-    private ImageButton account_btn;
-
+    private ImageButton account;
     private static final String API_KEY = "0ae44dc58ea8023c0d00a94e0cb0a0c9";
     private static final String TRENDING_MOVIES_URL = "https://api.themoviedb.org/3/trending/movie/day?api_key=";
     private static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=";
@@ -93,44 +83,6 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.homepage, container, false);
-
-        auth = FirebaseAuth.getInstance();
-        account_btn = view.findViewById(R.id.logout);
-        user = auth.getCurrentUser();
-        if (user == null){
-            Intent intent = new Intent(requireActivity().getApplicationContext(), Login.class);
-            startActivity(intent);
-            getActivity().finish();
-        }
-
-        account_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog dialog = new AlertDialog.Builder(requireContext())
-                        .setTitle("Confirm")
-                        .setMessage("Are you sure you want to log out?")
-                        .setPositiveButton("Logout", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                FirebaseAuth.getInstance().signOut();
-                                Intent intent = new Intent(requireContext(), Login.class);
-                                startActivity(intent);
-                                requireActivity().finish();
-                            }
-                        })
-                        .setNegativeButton("Cancel", null)
-                        .create();
-                dialog.setOnShowListener(dialogInterface -> {
-                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#00B6FA"));
-                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#67686D"));
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#242A32")));
-                });
-                dialog.show();
-
-            }
-        });
-
-
         //This part sets up multiple horizontal RecyclerViews for different movie categories,
         recyclerViewNowPlaying = view.findViewById(R.id.recyclerViewNowPlaying);
         recyclerViewNowPlaying.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -179,6 +131,22 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
         setupButton(view, R.id.science_fiction, GENRE_SCIENCE_FICTION_ID, "SF");
         setupButton(view, R.id.thriller, GENRE_THRILLER_ID, "Thriller");
         setupButton(view, R.id.western, GENRE_WESTERN_ID, "Western");
+        //This part sets up button for account
+        account = view.findViewById(R.id.account_btn);
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AccountFragment accountFragment = new AccountFragment();
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentLayout, accountFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+
+
         return view;
     }
 

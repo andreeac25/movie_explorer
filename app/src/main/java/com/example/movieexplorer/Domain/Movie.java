@@ -80,6 +80,15 @@ public class Movie {
     @Expose
     private Integer voteCount;
 
+    public Movie() {}
+
+    public Movie(Integer id, String title, String posterPath, String overview) {
+        this.id = id;
+        this.title = title;
+        this.posterPath = posterPath;
+        this.overview = overview;
+    }
+
     public Boolean getAdult() {
         return adult;
     }

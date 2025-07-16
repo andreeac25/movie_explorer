@@ -19,7 +19,7 @@
             tools:ignore="MissingConstraints">
 
             <ImageButton
-                android:id="@+id/logout"
+                android:id="@+id/account_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="320dp"

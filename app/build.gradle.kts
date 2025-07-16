@@ -39,6 +39,8 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     val fragment_version = "1.6.1"
 
@@ -56,6 +58,9 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.fragment:fragment:${fragment_version}")
     implementation("com.google.android.material:material:1.12.0")
+
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
 
 
 }
