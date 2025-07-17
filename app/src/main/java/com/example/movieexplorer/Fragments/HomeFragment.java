@@ -149,8 +149,6 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
 
         return view;
     }
-
-
     // This method runs when the fragment becomes visible again: it clears the search input if needed,
     // reloads movie data if the input is empty, and hides the keyboard to keep the UI clean.
     @Override
@@ -174,7 +172,6 @@ public class HomeFragment extends Fragment implements AdapterMovie.OnItemClickLi
             imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
         }
     }
-
     // This method sets up the search input behavior: it listens for search actions from the keyboard,
     // reloads movie data when the input is cleared, and activates the search input when the search area is clicked.
     private void setupSearchInput(View rootView) {

@@ -55,6 +55,7 @@ public class GenreFragment extends Fragment implements AdapterMovie.OnItemClickL
 
     public GenreFragment() {}
 
+    // Factory method to create a new instance of GenreFragment with genreId and genreName
     public static GenreFragment newInstance(String genreId, String genreName) {
         GenreFragment fragment = new GenreFragment();
         Bundle args = new Bundle();
@@ -67,10 +68,12 @@ public class GenreFragment extends Fragment implements AdapterMovie.OnItemClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Retrieve arguments passed via newInstance
         if (getArguments() != null) {
             genreId = getArguments().getString(GENRE_ID);
             genreName = getArguments().getString(GENRE_NAME);
         }
+        // Initialize Volley request queue for network operations
         mRequestQueue = Volley.newRequestQueue(requireContext());
     }
 
@@ -78,17 +81,23 @@ public class GenreFragment extends Fragment implements AdapterMovie.OnItemClickL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_genres, container, false);
         recyclerViewGenreMovies = view.findViewById(R.id.recyclerViewGenre);
+        // Setup RecyclerView with GridLayoutManager to display movies in grid format
         recyclerViewGenreMovies.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        // Initialize the list that will hold movies of this genre
         movieListGenre = new ArrayList<>();
+        // Initialize the adapter and set it to RecyclerView
         adapterGenreMovies = new AdapterMovie(movieListGenre, this);
         recyclerViewGenreMovies.setAdapter(adapterGenreMovies);
+        // Initialize the back button for this fragment
         genreTitleTextView = view.findViewById(R.id.genreTitleTextView);
         if (genreName != null) {
             genreTitleTextView.setText(genreName + " Movies");
         }
         backButtonGenres = view.findViewById(R.id.buttonBackGenres);
+        // Fetch movies that belong to the selected genre
         fetchMoviesByGenre();
         return view;
     }
@@ -97,11 +106,14 @@ public class GenreFragment extends Fragment implements AdapterMovie.OnItemClickL
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Set click listener for back button to handle navigation
         if (backButtonGenres != null) {
             backButtonGenres.setOnClickListener(v -> {
+                // If there are fragments in back stack, pop the last one
                 if (getParentFragmentManager().getBackStackEntryCount() > 0) {
                     getParentFragmentManager().popBackStack();
                 } else {
+                    // If no back stack, finish the activity
                     requireActivity().finish();
                 }
             });
@@ -110,29 +122,36 @@ public class GenreFragment extends Fragment implements AdapterMovie.OnItemClickL
         }
     }
 
+    // Method to fetch movies of the selected genre using TMDB API
     private void fetchMoviesByGenre() {
+        // Validate genreId before making the request
         if (genreId == null || genreId.isEmpty()) {
-            Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Error: Genre ID not provided", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        // Construct the URL for fetching movies by genre using API key and genreId
         String url = GENRES_URL + API_KEY + "&with_genres=" + genreId;
+        // Create a StringRequest for the GET method
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            // Parse the JSON response
                             JSONObject jsonResponse = new JSONObject(response);
+                            // Extract the "results" JSON array as a string
                             String resultsArray = jsonResponse.getJSONArray("results").toString();
+                            // Use Gson to convert JSON array string to List<Movie>
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Movie>>() {
                             }.getType();
                             List<Movie> fetchedMovies = gson.fromJson(resultsArray, listType);
-
+                            // Clear current list and add new movies
                             movieListGenre.clear();
                             movieListGenre.addAll(fetchedMovies);
+                            // Notify adapter that data set has changed to update UI
                             adapterGenreMovies.notifyDataSetChanged();
-
+                            // If no movies found, notify user
                             if (fetchedMovies.isEmpty()) {
                                 Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
                             }
@@ -143,20 +162,24 @@ public class GenreFragment extends Fragment implements AdapterMovie.OnItemClickL
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                // Log and show error toast if network request fails
                 Log.e("GenreMovieFragment", "Volley Error for genre movies: " + error.getMessage());
                 Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
             }
         });
+        // Tag the request with this fragment for easy cancellation later
         stringRequest.setTag(this);
+        // Add the request to the Volley request queue
         mRequestQueue.add(stringRequest);
     }
 
+    // Handle item click from AdapterMovie to open DetailFragment with the selected movie
     public void onItemClick(Movie film) {
         if (getParentFragmentManager() != null) {
             DetailFragment detailFragment = DetailFragment.newInstance(film.getId());
             getParentFragmentManager().beginTransaction()
                     .replace(R.id.fragmentLayout, detailFragment)
-                    .addToBackStack(null)
+                    .addToBackStack(null) // add to back stack so user can navigate back
                     .commit();
         }
     }
@@ -164,6 +187,7 @@ public class GenreFragment extends Fragment implements AdapterMovie.OnItemClickL
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        // Cancel any ongoing Volley requests tagged with this fragment to avoid memory leaks
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(this);
         }

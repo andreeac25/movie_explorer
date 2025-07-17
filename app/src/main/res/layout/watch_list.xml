@@ -13,29 +13,27 @@
         android:orientation="vertical"
         android:background="@color/background"
         tools:ignore="MissingConstraints">
-
         <!-- Title of frame -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/poppins_thin"
             android:gravity="center"
             android:text="@string/list"
             android:textColor="@color/white"
             android:textSize="20sp"
             tools:ignore="MissingConstraints" />
-
         <!-- RecycleView for WatchList -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewWatchList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="60dp"
+            android:layout_marginStart="10dp"
             android:clipToPadding="false"
             android:padding="10dp" />
-
         <!-- Empty list -->
         <TextView
             android:id="@+id/emptyWatchlistMessage"

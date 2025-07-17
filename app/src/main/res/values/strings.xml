@@ -21,11 +21,11 @@
     <string name="documentary">Documentary</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="login">LOGIN</string>
+    <string name="login">Login</string>
     <string name="social_login">Social Login</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
-    <string name="sign_up">SIGN-UP</string>
+    <string name="sign_up">Sign-up</string>
     <string name="create_account">Create Account</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="confirm_password">Confirm password</string>

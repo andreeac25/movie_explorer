@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Set the layout for this activity to activity_main.xml
         setContentView(R.layout.activity_main);
 
         fragmentManager = getSupportFragmentManager();  // This line initializes the fragment manager.
@@ -55,9 +56,12 @@ public class MainActivity extends AppCompatActivity {
                 updateButtonColor(searchBtn, true);
                 updateButtonColor(homePageBtn, false);
                 updateButtonColor(watchListPageBtn, false);
-                    replaceFragment(homeFragment);
-                    fragmentManager.executePendingTransactions();
-                    homeFragment.activateSearchInput();
+                // Replace the current fragment with the HomeFragment
+                replaceFragment(homeFragment);
+                // Ensure the fragment transaction is completed before proceeding
+                fragmentManager.executePendingTransactions();
+                // Activate the search input field in the HomeFragment
+                homeFragment.activateSearchInput();
             }
         });
 
@@ -69,11 +73,14 @@ public class MainActivity extends AppCompatActivity {
                 updateButtonColor(watchListPageBtn, false);
                 updateButtonColor(searchBtn, false);
                     homeFragment = new HomeFragment();
-                    fragmentManager.beginTransaction()
+                // Begin a fragment transaction to add the HomeFragment to the layout
+                fragmentManager.beginTransaction()
                             .add(R.id.fragmentLayout, homeFragment)
                             .commit();
-                    fragmentManager.executePendingTransactions();
-                    showFragment(homeFragment);
+                // Ensure the transaction is completed before proceeding
+                fragmentManager.executePendingTransactions();
+                // Show the HomeFragment (might handle visibility logic if multiple fragments are active)
+                showFragment(homeFragment);
                 }
         });
 
@@ -84,30 +91,40 @@ public class MainActivity extends AppCompatActivity {
                 updateButtonColor(watchListPageBtn, true);
                 updateButtonColor(homePageBtn, false);
                 updateButtonColor(searchBtn, false);
-                    watchListFragment = new WatchListFragment();
-                    fragmentManager.beginTransaction()
+                // Create a new instance of the WatchListFragment
+                watchListFragment = new WatchListFragment();
+                // Begin a fragment transaction to add the WatchListFragment to the layout
+                fragmentManager.beginTransaction()
                             .add(R.id.fragmentLayout, watchListFragment)
                             .commit();
-                    fragmentManager.executePendingTransactions();
+                // Ensure the transaction is executed immediately before continuing
+                fragmentManager.executePendingTransactions();
             }
         });
     }
 
     // This method shows the specified fragment and hides others.
     private void showFragment(Fragment fragmentToShow) {
+        // Begin a new fragment transaction
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        // Get the list of all fragments managed by the FragmentManager
         List<Fragment> fragments = fragmentManager.getFragments();
+        // Loop through each fragment
         for (Fragment fragment : fragments) {
+            // Check if the fragment is not null and has been added to the fragment manager
             if (fragment != null && fragment.isAdded()) {
                 if (fragment == fragmentToShow) {
+                    // Show the fragment we want to display
                     transaction.show(fragment);
                 } else {
+                    // Hide all other visible fragments
                     if (fragment.isVisible()) {
                         transaction.hide(fragment);
                     }
                 }
             }
         }
+        // Commit the transaction to apply the changes
         transaction.commit();
     }
 
@@ -123,9 +140,13 @@ public class MainActivity extends AppCompatActivity {
 
     // This method replaces the current fragment in the layout with a new one
     private void replaceFragment(Fragment fragment) {
+        // Get the FragmentManager to interact with fragments associated with this activity
         FragmentManager fragmentManager = getSupportFragmentManager();
+        // Begin a new fragment transaction
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        // Replace the current fragment in the container (R.id.fragmentLayout) with the new fragment
         fragmentTransaction.replace(R.id.fragmentLayout, fragment);
+        // Commit the transaction to apply the changes
         fragmentTransaction.commit();
     }
 }

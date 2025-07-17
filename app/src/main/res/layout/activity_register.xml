@@ -13,92 +13,100 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints">
-
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="65dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/create_account"
-            android:textSize="40sp"
             android:layout_marginTop="60dp"
-            android:textColor="@color/white"
             android:fontFamily="@font/poppins_thin"
-            android:padding="10dp"
             android:gravity="center"
-            />
+            android:padding="10dp"
+            android:text="@string/create_account"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/create_user" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="25dp"
+            android:id="@+id/register_email_input"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
             android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/rounded_corner"
             android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:textColor="@color/white"
             android:textColorHint="@color/gray"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_corner"
-            android:padding="18dp"
-            android:inputType="textEmailAddress"
-            android:id="@+id/register_email_input"
-            />
+            android:textSize="16sp" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/register_password_input"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginStart="25dp"
+            android:background="@drawable/rounded_corner"
             android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:textColor="@color/white"
             android:textColorHint="@color/gray"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_corner"
-            android:padding="18dp"
-            android:inputType="textPassword"
-            android:id="@+id/register_password_input" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="Register"
-            android:fontFamily="@font/poppins_thin"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/blue"
-            android:padding="18dp"
-            android:layout_marginTop="32sp"
-            android:layout_margin="40dp"
-            android:textSize="25sp"
-            android:id="@+id/register_btn"/>
+            android:textSize="16sp" />
 
         <ProgressBar
             android:id="@+id/progressBarRegister"
-            android:visibility="gone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_margin="20dp"
+            android:backgroundTint="@color/lightGray"
+            android:fontFamily="@font/poppins_thin"
+            android:padding="5dp"
+            android:text="Register"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="160dp"
             android:gravity="center"
             android:text="@string/already_have_an_account"
             android:textColor="@color/white"
-            android:textSize="20sp"/>
+            android:textSize="14sp" />
+
         <Button
             android:id="@+id/logNow"
             android:layout_width="110dp"
             android:layout_height="50dp"
-            android:text="@string/login"
+            android:backgroundTint="@android:color/transparent"
             android:fontFamily="@font/poppins_thin"
-            android:backgroundTint="@color/blue"
-            android:textSize="15sp"/>
-
+            android:text="@string/login"
+            android:textColor="@color/lightBlue"
+            android:textSize="12sp" />
 
 
     </LinearLayout>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

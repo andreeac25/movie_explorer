@@ -36,21 +36,19 @@ import java.util.Locale;
 
 public class DetailFragment extends Fragment {
 
-    private static final String FILM_ID = "id";
-    private RequestQueue mRequestQueue;
+    private static final String FILM_ID = "id"; // Constant key used for passing the film ID via a Bundle
+    private RequestQueue mRequestQueue; // Volley request queue for handling network requests
     private TextView title, overview, releaseDate, score, runtime, categories;
-    private int idFilm;
+    private int idFilm; // Holds the ID of the movie to be fetched
     private ImageView background, poster, backBtn;
     private StringRequest mStringReguest;
     private ImageButton saveButton;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
-    private Movie currentMovie;
-    private boolean isMovieSaved = false;
+    private Movie currentMovie; // Holds the details of the currently loaded movie
+    private boolean isMovieSaved = false; // Flag to track if the movie is already saved in the watchlist
     private static final String API_KEY = "0ae44dc58ea8023c0d00a94e0cb0a0c9";
-    private static final String BASE_DETAIL_URL = "https://api.themoviedb.org/3/movie/";
-
-
+    private static final String DETAIL_URL = "https://api.themoviedb.org/3/movie/"; // Base URL for fetching movie details from TMDb
 
     // This method creates a new DetailFragment instance with a specific film ID.
     public static DetailFragment newInstance(int filmId) {
@@ -122,7 +120,7 @@ public class DetailFragment extends Fragment {
         // Initialize the Volley request queue with the current context
         mRequestQueue = Volley.newRequestQueue(requireContext());
         // Construct the API request URL using the base URL, movie ID, and API key
-        String url = BASE_DETAIL_URL + idFilm + "?api_key=" + API_KEY;
+        String url = DETAIL_URL + idFilm + "?api_key=" + API_KEY;
         // Create a StringRequest to fetch data from the API
         mStringReguest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             // This block handles the successful response from the API.

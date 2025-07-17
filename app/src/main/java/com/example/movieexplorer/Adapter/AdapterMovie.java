@@ -1,6 +1,5 @@
 package com.example.movieexplorer.Adapter;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.movieexplorer.Domain.Movie;
-import com.example.movieexplorer.Domain.Genre;
 import com.example.movieexplorer.R;
 
 import java.util.List;
@@ -68,7 +66,7 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MovieViewHol
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl)
                 .placeholder(R.drawable.unavailable) // Show placeholder image while loading
-                .error(R.drawable.unavailable) //// Show this image if loading fails
+                .error(R.drawable.unavailable) // Show this image if loading fails
                 .into(holder.posterImageView);
         // Set a click listener on the entire item view to notify the listener when clicked
         holder.itemView.setOnClickListener(v -> {
@@ -84,6 +82,7 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MovieViewHol
         return movieList.size();
     }
 
+    // ViewHolder class for holding and recycling views within the RecyclerView
     public static class MovieViewHolder extends RecyclerView.ViewHolder {
         ImageView posterImageView;
         TextView titleTextView;
@@ -101,7 +100,6 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MovieViewHol
                 scoreTextView = itemView.findViewById(R.id.scoreTxt);
                 dateResult = itemView.findViewById(R.id.year);
                 genreTextView = itemView.findViewById(R.id.genreMovie);
-
             } else if (layoutResId == R.layout.search_item) {
                 // For the search results item layout
                 posterImageView = itemView.findViewById(R.id.search_item_poster);

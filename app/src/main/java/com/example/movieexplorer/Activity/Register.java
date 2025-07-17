@@ -29,11 +29,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Register extends AppCompatActivity {
 
-    EditText editText, editTextPassword;
-    Button buttonReg, buttonLog;
-    FirebaseAuth mAuth;
-    ProgressBar progressBar;
-
+    private EditText editText, editTextPassword;
+    private Button buttonReg, buttonLog;
+    private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
+    private String email, password;
     @Override
     public void onStart() {
         super.onStart();
@@ -50,14 +50,16 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        EdgeToEdge.enable(this); // Enable edge-to-edge UI layout
         setContentView(R.layout.activity_register);
+        // Initialize UI components
         editText = findViewById(R.id.register_email_input);
         editTextPassword = findViewById(R.id.register_password_input);
         buttonReg = findViewById(R.id.register_btn);
         progressBar = findViewById(R.id.progressBarRegister);
         buttonLog = findViewById(R.id.logNow);
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance(); // Get Firebase authentication instance
+        // Set listener for "Log In" button to navigate to Login activity
         buttonLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,34 +68,35 @@ public class Register extends AppCompatActivity {
                 finish();
             }
         });
-
+        // Set listener for "Register" button to create a new account
         buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE); // Show progress bar while processing
                 String email, password;
+                // Retrieve email and password input from user
                 email = editText.getText().toString();
                 password = editTextPassword.getText().toString();
                 mAuth = FirebaseAuth.getInstance();
-
-                if(TextUtils.isEmpty(email)){
+                // Validate email input
+                if (TextUtils.isEmpty(email)) {
                     Toast.makeText(Register.this, "Enter email", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                if(TextUtils.isEmpty(password)){
+                // Validate password input
+                if (TextUtils.isEmpty(password)) {
                     Toast.makeText(Register.this, "Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                // Use FirebaseAuth to create a user with email and password
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.VISIBLE); // Hide progress bar after operation completes
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(Register.this, "Account created.",
+                                    Toast.makeText(Register.this, "Login Successful!",
                                             Toast.LENGTH_SHORT).show();
                                 } else {
                                     // If sign in fails, display a message to the user.

@@ -61,6 +61,9 @@ dependencies {
 
     implementation("androidx.room:room-runtime:2.6.1")
     annotationProcessor("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.core:core-splashscreen:1.2.0-rc01")
+    implementation("com.airbnb.android:lottie:6.1.0")
+
 
 
 }

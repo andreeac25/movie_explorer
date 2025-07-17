@@ -6,8 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-
-
         <FrameLayout
             android:id="@+id/homePage"
             android:layout_width="match_parent"
@@ -17,17 +15,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints">
-
             <ImageButton
                 android:id="@+id/account_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="320dp"
                 android:layout_marginTop="35dp"
-                android:src="@drawable/icon_acccount_circle"
+                android:src="@drawable/user"
                 android:scaleType="centerInside"
                 android:background="@android:color/transparent"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +33,6 @@
                 android:fontFamily="@font/poppins_thin"
                 android:layout_marginTop="35dp"
                 android:layout_marginStart="20dp" />
-
             <LinearLayout
                 android:id="@+id/search_layout"
                 android:layout_width="match_parent"
@@ -50,8 +45,6 @@
                 android:background="@drawable/rounded_corner"
                 android:gravity="center_vertical"
                 android:backgroundTint="@color/lightGray">
-
-
                 <EditText
                     android:id="@+id/search_input"
                     android:layout_width="0dp"
@@ -64,15 +57,13 @@
                     android:textColor="@color/white"
                     android:textColorHint="@color/gray"
                     android:inputType="text" />
-
                 <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/search_mirror"
-                android:layout_marginEnd="10dp"
-                android:padding="5dp"
-                app:tint="@color/gray" />
-
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/search_mirror"
+                    android:layout_marginEnd="10dp"
+                    android:padding="5dp"
+                    app:tint="@color/gray" />
             </LinearLayout>
 
             <HorizontalScrollView
@@ -87,22 +78,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:orientation="horizontal">
-            <Button
-                android:id="@+id/action"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Action"
-                android:textColor="@color/white"
-                android:layout_marginEnd="10dp"
-                android:backgroundTint="@color/searchColor"/>
-            <Button
-                android:id="@+id/adventure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Adventure"
-                android:textColor="@color/white"
-                android:layout_marginEnd="10dp"
-                android:backgroundTint="@color/searchColor"/>
+                <Button
+                    android:id="@+id/action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Action"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="#333C47"/>
+                <Button
+                    android:id="@+id/adventure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Adventure"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/animation"
                     android:layout_width="wrap_content"
@@ -110,7 +101,7 @@
                     android:text="Animation"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor" />
+                    android:backgroundTint="#333C47" />
                 <Button
                     android:id="@+id/comedy"
                     android:layout_width="wrap_content"
@@ -118,7 +109,7 @@
                     android:text="Comedy"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/crime"
                     android:layout_width="wrap_content"
@@ -126,7 +117,7 @@
                     android:text="Crime"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor" />
+                    android:backgroundTint="#333C47" />
                 <Button
                     android:id="@+id/documentary"
                     android:layout_width="wrap_content"
@@ -134,7 +125,7 @@
                     android:text="Documentary"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/drama"
                     android:layout_width="wrap_content"
@@ -142,7 +133,7 @@
                     android:text="Drama"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/family"
                     android:layout_width="wrap_content"
@@ -150,7 +141,7 @@
                     android:text="Family"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/fantasy"
                     android:layout_width="wrap_content"
@@ -158,7 +149,7 @@
                     android:text="Fantasy"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/history"
                     android:layout_width="wrap_content"
@@ -166,7 +157,7 @@
                     android:text="History"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/horror"
                     android:layout_width="wrap_content"
@@ -174,7 +165,7 @@
                     android:text="Horror"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/music"
                     android:layout_width="wrap_content"
@@ -182,7 +173,7 @@
                     android:text="Music"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/mystery"
                     android:layout_width="wrap_content"
@@ -190,7 +181,7 @@
                     android:text="Mystery"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/romance"
                     android:layout_width="wrap_content"
@@ -198,7 +189,7 @@
                     android:text="Romance"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/science_fiction"
                     android:layout_width="wrap_content"
@@ -206,7 +197,7 @@
                     android:text="Sciente Fiction"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/thriller"
                     android:layout_width="wrap_content"
@@ -214,7 +205,7 @@
                     android:text="Thriller"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
+                    android:backgroundTint="#333C47"/>
                 <Button
                     android:id="@+id/western"
                     android:layout_width="wrap_content"
@@ -222,29 +213,23 @@
                     android:text="Western"
                     android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/searchColor"/>
-
-
+                    android:backgroundTint="#333C47"/>
             </LinearLayout>
         </HorizontalScrollView>
-
-        </FrameLayout>
-
+    </FrameLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="65dp"
         android:layout_marginTop="-15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homePage"
         tools:ignore="MissingConstraints">
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
@@ -252,7 +237,6 @@
                 android:layout_marginTop="20dp"
                 android:contentDescription="@string/fire"
                 android:src="@drawable/play" />
-
             <TextView
                 android:id="@+id/now_playing"
                 android:layout_width="match_parent"
@@ -264,152 +248,140 @@
                 android:text="Now Playing"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewNowPlaying"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="50dp"
                 android:orientation="vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="270dp"
+                android:layout_marginTop="265dp"
                 android:contentDescription="@string/fire"
                 android:src="@drawable/profits" />
-
             <TextView
                 android:id="@+id/trending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="265dp"
+                android:layout_marginTop="260dp"
                 android:layout_marginEnd="180dp"
                 android:fontFamily="@font/poppins_thin"
                 android:text="Trending"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewTrending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="295dp"
                 android:orientation="vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="515dp"
+                android:layout_marginTop="510dp"
                 android:contentDescription="@string/fire"
                 android:src="@drawable/hourglass" />
-
             <TextView
                 android:id="@+id/upcoming"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="510dp"
+                android:layout_marginTop="505dp"
                 android:layout_marginEnd="180dp"
                 android:fontFamily="@font/poppins_thin"
                 android:text="Upcoming"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewUpcoming"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="540dp"
                 android:orientation="vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="765dp"
+                android:layout_marginTop="760dp"
                 android:contentDescription="@string/fire"
                 android:src="@drawable/fire" />
-
             <TextView
                 android:id="@+id/popular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="760dp"
+                android:layout_marginTop="755dp"
                 android:layout_marginEnd="180dp"
                 android:fontFamily="@font/poppins_thin"
                 android:text="Popular"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewPopular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="790dp"
                 android:orientation="vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="1015dp"
+                android:layout_marginTop="1010dp"
                 android:contentDescription="@string/fire"
                 android:src="@drawable/star_home" />
-
             <TextView
                 android:id="@+id/topRated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="1010dp"
+                android:layout_marginTop="1005dp"
                 android:layout_marginEnd="180dp"
                 android:fontFamily="@font/poppins_thin"
                 android:text="Top Rated"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewTopRated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1040dp"
+                android:layout_marginTop="1045dp"
                 android:orientation="vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </FrameLayout>
-
-
     </ScrollView>
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
